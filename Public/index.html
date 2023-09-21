@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./css/styles.css">
 </head>
-<body>
+<body onLoad="myOnLoad()">
     <header>
         <div class="container">
             <h2>Grupo 12 FPW</h2>
@@ -17,112 +17,44 @@
         </div>
     </header>
     <main>
-        <section id="mercancia">
-            <div class="contaniner">
-                <h1>Comparador de precios</h1>
-                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="img/Agua.webp" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/alimento-gato.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/alimento-perro.webp" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="img/arroz.webp" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="img/azucar.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="img/chocolate.webp" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="img/detergente.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="img/fideo.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="img/harina.webp" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="img/lavandina.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="img/leche.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="img/papas.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="img/sal.webp" class="d-block w-100" alt="...">
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Comparador de precios</h2>
+                    <div class="mb-3">
+                        <label for="listaProductos">productos</label>
+                        <select id="listaProductos" name="producto" class="form-select" aria-label="Default select example">
+                            <option>Seleccione un producto...</option>
+                        </select>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="precioProd" class="form-label">Precio</label>
+                        <input type="number" min="0" class="form-control" id="precioProd"
+                            placeholder="$$$">
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="listaComercios">comercios</label>
+                        <select id="listaComercios" name="supermercado" class="form-select"
+                            aria-label="Default select example">
+                            <option>Seleccione un comercio...</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-success" onclick="agregar()">agregar producto</button>
+                </div>
+                <div class="col">
+                    <h2>Listado de Productos</h2>
+                    <div id="tablaProductos">
+                    </div>
+                </div>
+                <div class="col">
+                    <h2>Productos Menor Precio</h2>
+                    <div id="tablaFiltrada">
                     </div>
                 </div>
             </div>
-            <input id="producto" class="dato" type="text" placeholder="producto" size="20" required>
-            <div class="container"></div>
-                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="img/carrefour.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/changomas.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/dia.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="img/vea.webp" class="d-block w-100" alt="...">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-            <input id="comercio" class="dato" type="text" placeholder="comercio" size="20" required>
-            <div>
-                <input id="importe" class="dato" type="number" placeholder=" importe" step="10" min="0">
-                <button id="guardar" class="boton">Guardar Producto</button>
-            </div>
-        </section>
-        <section id="listado">
-            <div class="container">
-                <h2>Listado de Productos</h2>
-                <div>
-                    <h5 id="listado1"></h5>
-                    <h5 id="listado2"></h5>
-                    <h5 id="listado3"></h5>
-                </div>
-            </div>
-        </section>
-        <section id="barato">
-            <div>
-                <h2>Productos con menor precio</h2>
-                <div>
-
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
     <footer>
         <div class="container">
