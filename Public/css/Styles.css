@@ -5,20 +5,22 @@
     list-style: none;
 }
 
-header .container{
-    max-width: 1400px;
-    margin: auto;
-    background: black;
-    color: white;
-    text-align: center;
+nav{
+    background-color: black;
+    padding: 80px;
 }
 
-footer .container{
-    max-width: 1400px;
-    margin: auto;
-    background: black;
+.expandir:hover {
+    font-size: 18px;
+}
+
+.expandir{
+    transition: all .3s ease;
+}
+
+h3{
     color: white;
-    text-align: center;
+    margin: auto;
 }
 
 h2{
@@ -26,20 +28,23 @@ h2{
 }
 
 .logo{
-    width: 100px;
+    width: 50px;
 }
 
-h1,h2 {
-    text-align: center;
-}
-h1{
-    width: 100%;
-    padding: 10px;
-    font-size: 50px;
-}
 body{
-    background: orange;
     font-family: 'Roboto' , sans-serif;
+}
+
+main{
+    background: orange;
+}
+
+.col{
+    padding: 15%;
+}
+
+h2{
+    text-align: center;
 }
 
 .btn{
@@ -62,14 +67,16 @@ body{
     color: white;
 }
 
-.footer {
-    background-color: #24262B;
-    padding: 80px;
+footer {
+    background-color: black;
+    padding: 60px;
+    padding-bottom: 20px;
 }
 
 .footer-row{
     display: flex;
     flex-wrap: wrap;
+    text-align: center;
 }
 
 .footer-links{
@@ -120,4 +127,39 @@ body{
 
 .social-link a:hover{
     background-color: #00C3FF;
+}
+
+.copy{
+    color: white;
+    margin:0;
+    text-align: center;
+    margin-top: 100px;
+}
+
+@media(min-width: 991px){
+
+    ul{
+      margin: auto;
+    }
+    .col{
+        padding: 20px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+    .footer-row{
+     text-align: start;
+     justify-content: space-between;
+    }
+
+    .footer-links{
+        width: 25%;
+        margin-bottom: 30px;
+        padding: 0;
+    }
+
+    .copy{
+        text-align: end;
+        margin-top: 20px;
+    }
 }
