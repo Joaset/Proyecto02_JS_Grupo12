@@ -10,19 +10,19 @@ function myOnLoad() {
 
 function addOptions(domElement, array) {
     let select = document.getElementsByName(domElement)[0];
-    array.forEach((p) => {
+    for (value in array) {
         let option = document.createElement("option");
-        option.text = p;
-        select.add(option)
-    })
+        option.text = array[value];
+        select.add(option);
+    }
 }
 function addOptions2(domElement, array) {
     let select = document.getElementsByName(domElement)[0];
-    array.forEach((p) => {
+    for (value in array) {
         let option = document.createElement("option");
-        option.text = p;
-        select.add(option)
-    })
+        option.text = array[value];
+        select.add(option);
+    }
 }
 
 function agregar() {
@@ -30,7 +30,7 @@ function agregar() {
     let precioProducto = document.getElementById('precioProd').value
     let nombreComercio = document.getElementById('listaComercios').value
     if (nombreProducto != '' && precioProducto != '' && nombreComercio != '') {
-        let producto = {nombreProducto, precioProducto, nombreComercio}
+        let producto = { nombreProducto, precioProducto, nombreComercio }
         lista.push(producto)
         document.getElementById('listaProductos').value = null
         document.getElementById('precioProd').value = null
@@ -55,26 +55,33 @@ function mostrarTabla() {
     tabla.className = 'table table-success'
     tabla.id = 'listado'
     tabla.appendChild(cuerpoTabla)
+
     let tr = document.createElement('tr')
     cuerpoTabla.appendChild(tr);
-    encabezado.forEach((element) => {
+    for (let i = 0; i < encabezado.length; i++) {
         let th = document.createElement('th')
-        th.appendChild(document.createTextNode(element))
+        th.appendChild(document.createTextNode(encabezado[i]))
         tr.appendChild(th)
-    })
-    lista.forEach((p) => {
+    }
+    for (let i = 0; i < lista.length; i++) {
         let tr = document.createElement('tr')
+
         let producto = document.createElement('td')
-        producto.appendChild(document.createTextNode(p.nombreProducto))
+        producto.appendChild(document.createTextNode(lista[i].nombreProducto))
         tr.appendChild(producto)
+
         let precio = document.createElement('td')
-        precio.appendChild(document.createTextNode(p.precioProducto))
+        precio.appendChild(document.createTextNode(lista[i].precioProducto))
         tr.appendChild(precio)
+
         let comercio = document.createElement('td')
-        comercio.appendChild(document.createTextNode(p.nombreComercio))
+        comercio.appendChild(document.createTextNode(lista[i].nombreComercio))
         tr.appendChild(comercio)
+
         cuerpoTabla.appendChild(tr)
-    })
+
+    }
+
     contenedorTabla.appendChild(tabla)
 }
 
@@ -92,42 +99,58 @@ function mostrarTablaFiltrada() {
     tabla.className = 'table table-dark'
     tabla.id = 'filtrada'
     tabla.appendChild(cuerpoTabla)
+
     let tr = document.createElement('tr')
     cuerpoTabla.appendChild(tr);
-    encabezado.forEach((element) => {
+    for (let i = 0; i < encabezado.length; i++) {
         let th = document.createElement('th')
-        th.appendChild(document.createTextNode(element))
+        th.appendChild(document.createTextNode(encabezado[i]))
         tr.appendChild(th)
-    })
-    filtrada.forEach((p) => {
+    }
+
+    for (let i = 0; i < filtrada.length; i++) {
         let tr = document.createElement('tr')
+
         let producto = document.createElement('td')
-        producto.appendChild(document.createTextNode(p.nombreProducto))
+        producto.appendChild(document.createTextNode(filtrada[i].nombreProducto))
         tr.appendChild(producto)
+
         let precio = document.createElement('td')
-        precio.appendChild(document.createTextNode(p.precioProducto))
+        precio.appendChild(document.createTextNode(filtrada[i].precioProducto))
         tr.appendChild(precio)
+
         let comercio = document.createElement('td')
-        comercio.appendChild(document.createTextNode(p.nombreComercio))
+        comercio.appendChild(document.createTextNode(filtrada[i].nombreComercio))
         tr.appendChild(comercio)
+
         cuerpoTabla.appendChild(tr)
-    })
+
+    }
+
     contenedorTabla.appendChild(tabla)
 }
 
 function filtrarTabla() {
-    let productos = lista.map((item) => [item.nombreProducto, item])
-    let productosPares = new Map(productos);
-    let listaUnicos = [...productosPares.values()]
-    let filtrada = []
-    listaUnicos.forEach((elemento, index) => {
-        lista.forEach((e, i) => {
-            if (elemento.nombreProducto == e.nombreProducto) {
-                if (elemento.precioProducto >= e.precioProducto) {
-                    filtrada[index] = lista[i]
-                }
-            }
-        })
+    let listaUnicos = []
+    let listaFiltrada = [];
+    lista.forEach((producto) => {
+        if (!listaUnicos.includes(producto.nombreProducto)) {
+            listaUnicos.push(producto.nombreProducto)
+        }
     })
-    return filtrada
+    for (let i = 0; i < listaUnicos.length; i++) {
+        let posicionProductoMinimo = -1;
+        let precioMinimo = Infinity;
+        for (let j = 0; j < lista.length; j++) {
+            if (listaUnicos[i] === lista[j].nombreProducto && parseFloat(lista[j].precioProducto) < precioMinimo) {
+                precioMinimo = parseFloat(lista[j].precioProducto);
+                posicionProductoMinimo = j;
+            }
+        }
+        if (posicionProductoMinimo !== -1) {
+            listaFiltrada.push(lista[posicionProductoMinimo]);
+        }
+
+    }
+    return listaFiltrada
 }
